@@ -7,6 +7,7 @@ let p5 = document.getElementById('product5');
 let highestbtn = document.getElementById('highestbtn');
 let nearzerobtn = document.getElementById('nearzerobtn');
 let lowestbtn = document.getElementById('lowestbtn');
+let submitbtn = document.getElementById('submitbtn');
 
 
 
@@ -33,6 +34,9 @@ form.addEventListener('submit',(event)=>{
 	highestbtn.removeAttribute('disabled');
 	nearzerobtn.removeAttribute('disabled');
 	lowestbtn.removeAttribute('disabled');
+	submitbtn.setAttribute('disabled', '');
+
+
 
 	event.preventDefault();
 	// console.log(typeof p1.value);
@@ -120,8 +124,8 @@ form.addEventListener('submit',(event)=>{
         var options = {
 			indexAxis:'y',
             scale: {
-                min:-1000,
-                max:1000,
+                // min:-1000,
+                // max:1000,
                 ticks: {
                     beginAtZero: true,
                     // min: 0,
@@ -146,6 +150,8 @@ form.addEventListener('submit',(event)=>{
                 // }
             }
         };
+
+		document.getElementById("pokemonStatscanvas").style.width = '100%';
 
 
 		var ctx = document.getElementById("pokemonStatscanvas").getContext("2d");
@@ -220,6 +226,7 @@ function returnhighest(){
 	// form.reset();
 
 	products = [];
+	submitbtn.removeAttribute('disabled');
 
 }
 
@@ -238,6 +245,7 @@ function returnlowest(){
 	// form.reset();
 
 	products = [];
+	submitbtn.removeAttribute('disabled');
 }
 
 function returnnearzero(){
@@ -254,5 +262,6 @@ function returnnearzero(){
 	result.innerHTML += "<br><br>Near zero produxt is "+nearzero;
 	// form.reset();
 	products = [];
+	submitbtn.removeAttribute('disabled');
 
 }
