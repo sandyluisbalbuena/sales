@@ -146,7 +146,7 @@ function returnhighest(){
 	products.forEach(product => {
 			result.innerHTML += product[0] +" = "+ product[1]+"<br>";		
 	});
-	result.innerHTML += "<br><br>Highest product is "+highest;
+	result.innerHTML += "<br><br>Highest product is "+highestname;
 	// form.reset();
 
 	products = [];
@@ -164,7 +164,7 @@ function returnlowest(){
 	products.forEach(product => {
 			result.innerHTML += product[0] +" = "+ product[1]+"<br>";		
 	});
-	result.innerHTML += "<br><br>Lowest product is "+lowest;
+	result.innerHTML += "<br><br>Lowest product is "+lowestname;
 	// form.reset();
 
 	products = [];
