@@ -86,6 +86,75 @@ form.addEventListener('submit',(event)=>{
 			}
 		});
 
+		
+
+
+        const dataRadarChart = {
+            labels: [
+                'Product 1',
+                'Product 2',
+                'Product 3',
+                'Product 4',
+                'Product 5',
+            ],
+            datasets: [{
+                label: 'Products Sales',
+                data: [products[0][1], products[1][1], products[2][1], products[3][1], products[4][1]],
+                fill: true,
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgb(255, 99, 132)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgb(255, 99, 132)'
+            }]
+        };
+
+        // Get a reference to the existing chart instance
+        let existingChart = Chart.getChart("pokemonStatscanvas");
+
+        // Destroy the existing chart instance
+        if (existingChart) {
+            existingChart.destroy();
+        }
+
+        var options = {
+			indexAxis:'y',
+            scale: {
+                min:-1000,
+                max:1000,
+                ticks: {
+                    beginAtZero: true,
+                    // min: 0,
+                    // max: 100,
+                    stepSize: 100,
+                }
+            },
+            elements: {
+                line: {
+                    borderWidth: 2
+                }
+            },
+            animation: {
+                duration: 2000, 
+                delay: 500,
+                // tension: {
+                //     duration: 1000,
+                    // easing: 'linear',
+                    // from: -0.2,
+                    // to: 0,
+                    // loop: true
+                // }
+            }
+        };
+
+
+		var ctx = document.getElementById("pokemonStatscanvas").getContext("2d");
+        new Chart(ctx, {
+            type: 'bar',
+            data: dataRadarChart,
+            options: options
+        });
+
 	}
 
 	else{
