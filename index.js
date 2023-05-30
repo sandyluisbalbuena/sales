@@ -17,11 +17,14 @@ let result = document.getElementById('result');
 result.style.display = "none";
 
 let products = [];
-let highest=-999;
+let highest=-99999999;
 let nearzero;
 let nearpositive;
 let nearnegative;
-let lowest=999;
+let lowest=99999999;
+
+let highestname = "";
+let lowestname = "";
 
 
 
@@ -60,7 +63,8 @@ form.addEventListener('submit',(event)=>{
 
 		products.forEach(product => {
 			if(product[1] > highest){
-				highest = product[0];
+				highest = product[1];
+				highestname = product[0];
 			}
 		});
 
@@ -77,7 +81,8 @@ form.addEventListener('submit',(event)=>{
 	
 		products.forEach(product => {
 			if(product[1] < lowest){
-				lowest = product[0];
+				lowest = product[1];
+				lowestname = product[0];
 			}
 		});
 	}
