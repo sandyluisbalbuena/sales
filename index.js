@@ -142,7 +142,10 @@ function returnhighest(){
 			result.innerHTML += product[0] +" = "+ product[1]+"<br>";		
 	});
 	result.innerHTML += "<br><br>Highest product is "+highest;
-	form.reset();
+	// form.reset();
+
+	products = [];
+
 }
 
 function returnlowest(){
@@ -157,7 +160,9 @@ function returnlowest(){
 			result.innerHTML += product[0] +" = "+ product[1]+"<br>";		
 	});
 	result.innerHTML += "<br><br>Lowest product is "+lowest;
-	form.reset();
+	// form.reset();
+
+	products = [];
 }
 
 function returnnearzero(){
@@ -172,5 +177,7 @@ function returnnearzero(){
 			result.innerHTML += product[0] +" = "+ product[1]+"<br>";		
 	});
 	result.innerHTML += "<br><br>Near zero produxt is "+nearzero;
-	form.reset();
+	// form.reset();
+	products = [];
+
 }
