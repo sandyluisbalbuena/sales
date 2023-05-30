@@ -85,6 +85,7 @@ form.addEventListener('submit',(event)=>{
 				lowestname = product[0];
 			}
 		});
+
 	}
 
 	else{
