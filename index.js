@@ -27,6 +27,9 @@ let lowest=99999999;
 let highestname = "";
 let lowestname = "";
 
+let distanceZero = Infinity;
+let items = [];
+
 
 
 form.addEventListener('submit',(event)=>{
@@ -72,16 +75,35 @@ form.addEventListener('submit',(event)=>{
 			}
 		});
 
-		let nearestZeroProduct = products.reduce((prev, curr) => {
-			let absValue = Math.abs(curr[1]);
-			if (absValue < Math.abs(prev[1])) {
-			return curr;
-			} else {
-			return prev;
-			}
-		});
+		// let nearestZeroProduct = products.reduce((prev, curr) => {
+		// 	let absValue = Math.abs(curr[1]);
+
+		// 		if (absValue < Math.abs(prev[1])) {
+		// 			console.log(curr)
+		// 			return curr;
+		// 		} else {
+		// 			console.log(prev)
+		// 			return prev;
+		// 		}
+		// });
+
+		let nearestZeroProduct = getItemsWithSameDistanceZero(products);
+
+		
+
+		// for (let item of arr) {
+		// 	if (Math.abs(item[1]) < distanceZero) {
+		// 		distanceZero = Math.abs(item[1]);
+		// 	}
+		// }
+
+		// for (let item of arr) {
+		// 	if (Math.abs(item[1]) === distanceZero) {
+		// 		items.push(item[0]);
+		// 	}
+		// }
 	
-		nearzero = nearestZeroProduct[0];
+		nearzero = nearestZeroProduct;
 	
 		products.forEach(product => {
 			if(product[1] < lowest){
@@ -176,13 +198,7 @@ form.addEventListener('submit',(event)=>{
 
 	// if(p1.value typeof != Num)
 
-
-
-
-
 	// console.log(p1,p2,p3,p4,p5);
-
-	
 
 	// products.forEach(product => {
 	// 	if(0 > nearpositive && nearpositive < product){
@@ -206,7 +222,7 @@ form.addEventListener('submit',(event)=>{
 
 	
 
-	console.log(products);
+	// console.log(products);
 
 });
 
@@ -257,11 +273,39 @@ function returnnearzero(){
 
 	result.style.display = "block"
 	products.forEach(product => {
-			result.innerHTML += product[0] +" = "+ product[1]+"<br>";		
+		result.innerHTML += product[0] +" = "+ product[1]+"<br>";		
 	});
-	result.innerHTML += "<br><br>Near zero produxt is "+nearzero;
+
+	
+	result.innerHTML += "<br><br>Near zero product (is/are) <br>";
+
+	nearzero.forEach(near => {
+		result.innerHTML += near+"<br>";
+	});
 	// form.reset();
 	products = [];
 	submitbtn.removeAttribute('disabled');
 
 }
+
+function getItemsWithSameDistanceZero(arr) {
+	let distanceZero = Infinity;
+	let items = [];
+  
+	// Find the minimum distance from zero
+	for (let item of arr) {
+	  	if (Math.abs(item[1]) < distanceZero) {
+			distanceZero = Math.abs(item[1]);
+	  	}
+	}
+  
+	// Find items with the same distance from zero
+	for (let item of arr) {
+		if (Math.abs(item[1]) === distanceZero) {
+			items.push(item[0]);
+		}
+	}
+  
+	return items;
+}
+  
