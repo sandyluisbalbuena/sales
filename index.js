@@ -18,17 +18,17 @@ let result = document.getElementById('result');
 result.style.display = "none";
 
 let products = [];
-let highest=-99999999;
+let highest=-Infinity;
 let nearzero;
 let nearpositive;
 let nearnegative;
-let lowest=99999999;
+let lowest=Infinity;
 
 let highestname = "";
 let lowestname = "";
 
-let distanceZero = Infinity;
-let items = [];
+// let distanceZero = Infinity;
+// let items = [];
 
 
 
@@ -87,7 +87,18 @@ form.addEventListener('submit',(event)=>{
 		// 		}
 		// });
 
+		let result;
+
 		let nearestZeroProduct = getItemsWithSameDistanceZero(products);
+
+		if(nearestZeroProduct.length>1){
+			result = getPositiveItemsWithSameDistanceZero(nearestZeroProduct);
+		}else{
+			result = nearestZeroProduct[0];
+		}
+
+
+		nearzero = result[0];
 
 		
 
@@ -103,7 +114,6 @@ form.addEventListener('submit',(event)=>{
 		// 	}
 		// }
 	
-		nearzero = nearestZeroProduct;
 	
 		products.forEach(product => {
 			if(product[1] < lowest){
@@ -277,11 +287,11 @@ function returnnearzero(){
 	});
 
 	
-	result.innerHTML += "<br><br>Near zero product (is/are) <br>";
+	result.innerHTML += "<br><br>Near zero product is "+nearzero;
 
-	nearzero.forEach(near => {
-		result.innerHTML += near+"<br>";
-	});
+	// nearzero.forEach(near => {
+	// 	result.innerHTML += near+"<br>";
+	// });
 	// form.reset();
 	products = [];
 	submitbtn.removeAttribute('disabled');
@@ -291,21 +301,43 @@ function returnnearzero(){
 function getItemsWithSameDistanceZero(arr) {
 	let distanceZero = Infinity;
 	let items = [];
-  
-	// Find the minimum distance from zero
+
 	for (let item of arr) {
-	  	if (Math.abs(item[1]) < distanceZero) {
+		if (Math.abs(item[1]) < distanceZero) {
 			distanceZero = Math.abs(item[1]);
-	  	}
-	}
-  
-	// Find items with the same distance from zero
-	for (let item of arr) {
-		if (Math.abs(item[1]) === distanceZero) {
-			items.push(item[0]);
 		}
 	}
-  
+
+	for (let item of arr) {
+		if (Math.abs(item[1]) === distanceZero) {
+			items.push([item[0],item[1]]);
+		}
+	}
+
+	console.log(items);
+
 	return items;
+}
+
+
+function getPositiveItemsWithSameDistanceZero(arr) {
+	let distanceZero = Infinity;
+	let positiveItems = [];
+
+	// Find the minimum positive distance from zero
+	for (let item of arr) {
+		if (item[1] >= 0 && item[1] < distanceZero) {
+			distanceZero = item[1];
+		}
+	}
+
+	// Find positive items with the same distance from zero
+	for (let item of arr) {
+		if (item[1] === distanceZero) {
+			positiveItems.push(item[0]);
+		}
+	}
+
+	return positiveItems;
 }
   
